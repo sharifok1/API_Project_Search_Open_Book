@@ -1,3 +1,10 @@
+body{
+    background-color: lightgray;
+}
 #search-field{
     width:30%;
+}
+#search-btn:hover{
+background-color: black;
+color:white;
 }

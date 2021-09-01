@@ -2,26 +2,51 @@
 document.getElementById('search-btn').addEventListener('click',function(){
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
-    // console.log(searchText)
+    
+    if(searchField.value === ''){
+        const error = document.getElementById('empty-mgs');
+        error.innerHTML=`
+        <h4>Please Enter your book Name before search!!!</h4>
+        `
+    }
+    else{
+        const emptyClean = document.getElementById('empty-mgs');
+        emptyClean.textContent='';
+        const url = `http://openlibrary.org/search.json?q=${searchText}`;
+        fetch(url)
+        .then(res => res.json())
+        .then(data => searchResult(data.docs))
+    
+    }  
+   // clean previous result and massage
+   
+    const cleanPastResult =document.getElementById('book-container');
+    cleanPastResult.textContent = '';
+    const error = document.getElementById('error-mgs');
+    error.textContent = '';
     searchField.value = '';
-    const url = `http://openlibrary.org/search.json?q=${searchText}`;
-    fetch(url)
-    .then(res => res.json())
-    .then(data => searchResult(data.docs))
+    document.getElementById('search-found').textContent='';
+
 })
 
 // search output and append/
 const searchResult = result=>{
-  
-   const containerDiv = document.getElementById('book-container');
-   
-    result.forEach(output =>{
-        console.log(output)
+    if(result.length === 0){
+        const error = document.getElementById('error-mgs');
+        error.innerHTML=`
+        <h4>Sorry!!! No result Found</h4>
+        `
+    }
+    else{
+        const containerDiv = document.getElementById('book-container');
+        let numberOfresult = 0;
+        result.forEach(output =>{
+            numberOfresult = numberOfresult+1;
         const bookCard = document.createElement('div')
-   bookCard.classList.add('col')
+        bookCard.classList.add('col')
 
         bookCard.innerHTML =`
-        <div class="card">
+                    <div class="card">
                         <img src="https://covers.openlibrary.org/b/id/${output.cover_i}-L.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                           <h5 class="card-title">${output.title}</h5>
@@ -29,11 +54,18 @@ const searchResult = result=>{
                         <ul class="list-group list-group-flush">
                           <li class="list-group-item"><b>Author:</b>${output.author_name}</li>
                           <li class="list-group-item"> <b>First Publish:</b>${output.first_publish_year}</li>
-                          <li class="list-group-item"><b>Publisher:</b>${output.publisher[0]}</li>
+                          <li class="list-group-item"><b>Publisher:</b>${output.publisher}</li>
                           
                         </ul>
                     </div>
         `
         containerDiv.appendChild(bookCard);
     })
+    // console.log(search-found);
+    const totalResult =document.getElementById('search-found');
+    totalResult.innerHTML=`
+    <p>There are ${numberOfresult} results found for you.</p>
+    `
+    }
+    
 }

@@ -12,26 +12,30 @@
     <title>Book Shop</title>
 
 </head>
-<body class="bg-light">
+<body class>
+    <!----------------------header text//------------------------->
     <header>
-        <h3 class="bg-secondary p-2">Open Library</h1>
+        <h3 class="bg-secondary p-2 ps-4">Open Library</h1>
     </header>
-    <main>
-        <div class="text-center">
-            <input id="search-field" class="rounded" type="text" placeholder="Search your book">
-            <button id="search-btn" class="rounded">Search</button>
-        </div>
 
+    <main>
+        <!------------------search feild and button// ------------>
+        <div class="text-center">
+            <input id="search-field" class="rounded py-1 px-2" type="text" placeholder="Search your book">
+            <button id="search-btn" class="rounded py-1 px-2">Search</button>
+        </div>
+        <!---------------------error massage ----------------------->
+        <div id="error-mgs" class="text-center mt-5">
+        </div>
+        <div id="empty-mgs" class="text-center mt-5">
+        </div>
+        <!-- book container//----------------------------------- -->
+        <div id="search-found" class="container">   
+        </div>
         <div class="container">
             <div id="book-container" class="row row-cols-1 row-cols-md-4 g-4 mt-4">     
-                
             </div>
         </div>
-            
-        
-
-
-
     </main>
     <script src="js/app.js"></script>
 </body>
