@@ -1,4 +1,4 @@
-// button click handlar
+//--------------------button click handlar---------------------------------
 document.getElementById('search-btn').addEventListener('click',function(){
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
@@ -12,14 +12,13 @@ document.getElementById('search-btn').addEventListener('click',function(){
     else{
         const emptyClean = document.getElementById('empty-mgs');
         emptyClean.textContent='';
-        const url = `http://openlibrary.org/search.json?q=${searchText}`;
+        const url = `https://openlibrary.org/search.json?q=${searchText}`;
         fetch(url)
         .then(res => res.json())
         .then(data => searchResult(data.docs))
     
     }  
-   // clean previous result and massage
-   
+   //--------------------clean previous result and massage----------------------- 
     const cleanPastResult =document.getElementById('book-container');
     cleanPastResult.textContent = '';
     const error = document.getElementById('error-mgs');
@@ -28,8 +27,7 @@ document.getElementById('search-btn').addEventListener('click',function(){
     document.getElementById('search-found').textContent='';
 
 })
-
-// search output and append/
+//-------------------------search output and append/-----------------------------
 const searchResult = result=>{
     if(result.length === 0){
         const error = document.getElementById('error-mgs');
@@ -47,7 +45,7 @@ const searchResult = result=>{
 
         bookCard.innerHTML =`
                     <div class="card">
-                        <img src="https://covers.openlibrary.org/b/id/${output.cover_i}-L.jpg" class="card-img-top" alt="...">
+                        <img src="https://covers.openlibrary.org/b/id/${output.cover_i}-L.jpg" class="card-img-top" alt="image note available">
                         <div class="card-body">
                           <h5 class="card-title">${output.title}</h5>
                         </div>
@@ -61,7 +59,7 @@ const searchResult = result=>{
         `
         containerDiv.appendChild(bookCard);
     })
-    // console.log(search-found);
+    //----search found items-------------------------------
     const totalResult =document.getElementById('search-found');
     totalResult.innerHTML=`
     <p>There are ${numberOfresult} results found for you.</p>
