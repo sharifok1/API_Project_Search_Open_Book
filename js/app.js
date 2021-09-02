@@ -45,7 +45,7 @@ const searchResult = result=>{
 
         bookCard.innerHTML =`
                     <div class="card">
-                        <img src="https://covers.openlibrary.org/b/id/${output.cover_i}-L.jpg" class="card-img-top" alt="image note available">
+                        <img src="https://covers.openlibrary.org/b/id/${output.cover_i}-M.jpg" class="card-img-top" alt="image note available">
                         <div class="card-body">
                           <h5 class="card-title">${output.title}</h5>
                         </div>
@@ -65,5 +65,4 @@ const searchResult = result=>{
     <p>There are ${numberOfresult} results found for you.</p>
     `
     }
-    
 }
