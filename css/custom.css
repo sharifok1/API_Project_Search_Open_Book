@@ -8,3 +8,11 @@ body{
 background-color: black;
 color:white;
 }
+#loading{
+display: none;
+}
+@media screen and (min-width: 768px) {
+  .photo{
+      height:300px;
+  }
+  }

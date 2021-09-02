@@ -2,14 +2,14 @@
 document.getElementById('search-btn').addEventListener('click',function(){
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
-    
     if(searchField.value === ''){
         const error = document.getElementById('empty-mgs');
         error.innerHTML=`
         <h4>Please Enter your book Name before search!!!</h4>
-        `
+        `;
     }
     else{
+        laderSpin('block');
         const emptyClean = document.getElementById('empty-mgs');
         emptyClean.textContent='';
         const url = `https://openlibrary.org/search.json?q=${searchText}`;
@@ -27,9 +27,14 @@ document.getElementById('search-btn').addEventListener('click',function(){
     document.getElementById('search-found').textContent='';
 
 })
+const laderSpin = status =>{
+    const loader = document.getElementById('loading').style.display = status
+}
 //-------------------------search output and append/-----------------------------
 const searchResult = result=>{
+   
     if(result.length === 0){
+        laderSpin('none');
         const error = document.getElementById('error-mgs');
         error.innerHTML=`
         <h4>Sorry!!! No result Found</h4>
@@ -45,7 +50,7 @@ const searchResult = result=>{
 
         bookCard.innerHTML =`
                     <div class="card">
-                        <img src="https://covers.openlibrary.org/b/id/${output.cover_i}-M.jpg" class="card-img-top" alt="image note available">
+                        <img class="photo" src="https://covers.openlibrary.org/b/id/${output.cover_i}-M.jpg" class="card-img-top " alt="image not available">
                         <div class="card-body">
                           <h5 class="card-title">${output.title}</h5>
                         </div>
@@ -53,11 +58,11 @@ const searchResult = result=>{
                           <li class="list-group-item"><b>Author:</b>${output.author_name}</li>
                           <li class="list-group-item"> <b>First Publish:</b>${output.first_publish_year}</li>
                           <li class="list-group-item"><b>Publisher:</b>${output.publisher}</li>
-                          
                         </ul>
                     </div>
         `
         containerDiv.appendChild(bookCard);
+        laderSpin('none');
     })
     //----search found items-------------------------------
     const totalResult =document.getElementById('search-found');
